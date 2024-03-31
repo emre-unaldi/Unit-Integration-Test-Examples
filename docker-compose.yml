@@ -1,0 +1,25 @@
+version: "3.0"
+
+services:
+  app:
+    container_name: user-service-api
+    image:  user-service-api:0.0.1
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    container_name: user-service-postgres-db
+    image: postgres
+    environment:
+      POSTGRES_DB: UserServiceApi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Admin38
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-user-service-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-user-service-data:
